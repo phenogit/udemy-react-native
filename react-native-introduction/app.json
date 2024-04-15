@@ -3,7 +3,7 @@
     "name": "react-native-introduction",
     "slug": "react-native-introduction",
     "version": "1.0.0",
-    "orientation": "portrait",
+    "orientation": "protrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
