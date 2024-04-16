@@ -9,6 +9,8 @@ export function ProfileCard({
   isOpenToWork,
   car,
   sayHello,
+  children,
+  image,
 }) {
   function yell() {
     return "I'm yelling!";
@@ -22,8 +24,10 @@ export function ProfileCard({
             style={style.avatar}
             source={{ uri: "https://i.pravatar.cc/300" }}
           />
+          {image}
         </View>
         <View style={style.texts}>
+          {children}
           <Text style={style.name}>
             {firstName} {lastName}
           </Text>
