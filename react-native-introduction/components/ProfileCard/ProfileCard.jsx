@@ -2,7 +2,18 @@ import { TouchableOpacity, Text, View, Image } from "react-native";
 import { style } from "./ProfileCard.style";
 import { FontAwesome } from "@expo/vector-icons";
 
-export function ProfileCard() {
+export function ProfileCard({
+  firstName,
+  lastName,
+  age,
+  isOpenToWork,
+  car,
+  sayHello,
+}) {
+  function yell() {
+    return "I'm yelling!";
+  }
+
   return (
     <View style={style.container}>
       <View style={style.header}>
@@ -13,8 +24,10 @@ export function ProfileCard() {
           />
         </View>
         <View style={style.texts}>
-          <Text style={style.name}>Pheno the Future</Text>
-          <Text>Hi, I am looking to branch out very soon!</Text>
+          <Text style={style.name}>
+            {firstName} {lastName}
+          </Text>
+          <Text>Hi, I am {age} and looking to branch out very soon!</Text>
         </View>
       </View>
       <View style={style.social}>
