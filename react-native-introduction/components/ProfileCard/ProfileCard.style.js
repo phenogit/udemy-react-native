@@ -9,6 +9,7 @@ export const style = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     padding: 2,
+    borderRadius: 10,
   },
   avatar: {
     width: 70,
@@ -29,8 +30,13 @@ export const style = StyleSheet.create({
     flexDirection: "row",
   },
   social: {
+    padding: 10,
     flexDirection: "row",
-    justifyContent: "space-around",
-    padding: 20,
+    justifyContent: "space-evenly",
+  },
+  socialButton: {
+    padding: 10,
+    borderRadius: 50,
+    backgroundColor: "#eee",
   },
 });
