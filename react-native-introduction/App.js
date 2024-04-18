@@ -5,6 +5,7 @@ import {
   Image,
   TouchableOpacity,
   Alert,
+  Linking,
 } from "react-native";
 import { Profile, ProfileCard } from "./components/ProfileCard/ProfileCard";
 import { AgeCounter } from "./components/AgeCounter/AgeCounter";
@@ -13,24 +14,32 @@ import { style } from "./App.style";
 import { useState } from "react";
 
 export default function App() {
-  const [clickCount, setClickCount] = useState(0);
-
-  function hello(name) {
-    Alert.alert("Hello", `Hello, ${name}!`);
-    setClickCount(clickCount + 1);
+  function goToSocialMedia(socialMedia) {
+    let url = "";
+    switch (socialMedia) {
+      case "twitter":
+        url = "https://twitter.com/johnhuang_dev";
+        break;
+      case "linkedin":
+        url = "https://www.linkedin.com/in/johnhuangdev/";
+        break;
+      case "github":
+        url = "https://github.com/phenogit";
+      default:
+        break;
+    }
+    Linking.openURL(url);
   }
 
   return (
     <SafeAreaProvider>
       <SafeAreaView style={style.container}>
         <ProfileCard
+          onPressSocialMediaIcon={goToSocialMedia}
           firstName={"John"}
           lastName={"Huang"}
           age={42}
-          isOpenToWork={true}
-          onPressTitle={hello}
         />
-        <Text style={{ fontSize: 20 }}>You clicked {clickCount} time(s).</Text>
       </SafeAreaView>
     </SafeAreaProvider>
   );

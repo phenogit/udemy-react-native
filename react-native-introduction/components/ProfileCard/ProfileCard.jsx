@@ -6,8 +6,7 @@ export function ProfileCard({
   firstName,
   lastName,
   age,
-  isOpenToWork,
-  onPressTitle,
+  onPressSocialMediaIcon,
 }) {
   return (
     <View style={style.container}>
@@ -19,31 +18,30 @@ export function ProfileCard({
           />
         </View>
         <View style={style.texts}>
-          <TouchableOpacity onPress={() => onPressTitle(firstName)}>
-            <Text style={style.name}>
-              {firstName} {lastName}
-            </Text>
-          </TouchableOpacity>
-          <Text>Hi, I am {age} and looking to branch out very soon!</Text>
-
-          <Text
-            style={{
-              backgroundColor: isOpenToWork ? "green" : "red",
-              color: "white",
-            }}
-          >
-            {isOpenToWork ? "Open to work" : "Not looking for work"}
+          <Text style={style.name}>
+            {firstName} {lastName}
           </Text>
+
+          <Text>Hi, I am {age} and looking to branch out very soon!</Text>
         </View>
       </View>
       <View style={style.social}>
-        <TouchableOpacity style={style.socialButton}>
+        <TouchableOpacity
+          onPress={() => onPressSocialMediaIcon("twitter")}
+          style={style.socialButton}
+        >
           <FontAwesome name="twitter" size={24} color="#1DA1F2" />
         </TouchableOpacity>
-        <TouchableOpacity style={style.socialButton}>
+        <TouchableOpacity
+          onPress={() => onPressSocialMediaIcon("linkedin")}
+          style={style.socialButton}
+        >
           <FontAwesome name="linkedin-square" size={24} color="#0A66C2" />
         </TouchableOpacity>
-        <TouchableOpacity style={style.socialButton}>
+        <TouchableOpacity
+          onPress={() => onPressSocialMediaIcon("github")}
+          style={style.socialButton}
+        >
           <FontAwesome name="github" size={24} color="#333" />
         </TouchableOpacity>
       </View>
