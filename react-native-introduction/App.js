@@ -1,4 +1,11 @@
-import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+  Alert,
+} from "react-native";
 import { Profile, ProfileCard } from "./components/ProfileCard/ProfileCard";
 import { AgeCounter } from "./components/AgeCounter/AgeCounter";
 import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
@@ -6,26 +13,24 @@ import { style } from "./App.style";
 import { useState } from "react";
 
 export default function App() {
-  const [movie, setMovie] = useState("The Matrix");
+  const [clickCount, setClickCount] = useState(0);
 
-  console.log(movie);
-  function changeMovie() {
-    setMovie("The Matrix Reloaded");
+  function hello(name) {
+    Alert.alert("Hello", `Hello, ${name}!`);
+    setClickCount(clickCount + 1);
   }
 
   return (
     <SafeAreaProvider>
       <SafeAreaView style={style.container}>
-        <TouchableOpacity onPress={changeMovie}>
-          <Text style={style.text}>{movie}</Text>
-        </TouchableOpacity>
-        {/*<AgeCounter />*/}
-        {/*<ProfileCard
-          firstName={"Pheno"}
-          lastName={"Future"}
-          age={60}
+        <ProfileCard
+          firstName={"John"}
+          lastName={"Huang"}
+          age={42}
           isOpenToWork={true}
-  />*/}
+          onPressTitle={hello}
+        />
+        <Text style={{ fontSize: 20 }}>You clicked {clickCount} time(s).</Text>
       </SafeAreaView>
     </SafeAreaProvider>
   );
