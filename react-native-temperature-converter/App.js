@@ -1,13 +1,20 @@
 import { styles } from "./App.styles";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
-import { Text } from "react-native";
+import { View, Text, ImageBackground } from "react-native";
+import hotBackground from "./assets/hot.png";
 
 export default function App() {
   return (
-    <SafeAreaProvider>
-      <SafeAreaView style={styles.root}>
-        <Text>Hello World</Text>
-      </SafeAreaView>
-    </SafeAreaProvider>
+    <ImageBackground source={hotBackground} style={styles.backgroundImage}>
+      <SafeAreaProvider>
+        <SafeAreaView style={styles.root}>
+          <View style={styles.workspace}>
+            <Text>Temperature Converter</Text>
+            <Text>Input</Text>
+            <Text>Button</Text>
+          </View>
+        </SafeAreaView>
+      </SafeAreaProvider>
+    </ImageBackground>
   );
 }
