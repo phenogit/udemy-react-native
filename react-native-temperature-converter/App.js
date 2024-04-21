@@ -5,10 +5,25 @@ import hotBackground from "./assets/hot.png";
 import { Input } from "./components/Input/Input";
 import { TemperatureDisplay } from "./components/TemperatureDisplay/TemperatureDisplay";
 import { useState } from "react";
+import {
+  UNITS,
+  convertTemperatureTo,
+  getOppositeUnit,
+} from "./utils/temperature";
+import { get } from "react-native/Libraries/TurboModule/TurboModuleRegistry";
 
 export default function App() {
   const [temperatureInput, setTemperatureInput] = useState(0);
   const [currentUnit, setCurrentUnit] = useState("°C");
+  const oppositeUnit = getOppositeUnit(currentUnit);
+
+  function getConvertedTemperature() {
+    if (isNaN(temperatureInput)) {
+      return "Invalid input";
+    } else {
+      return convertTemperatureTo(temperatureInput, oppositeUnit).toFixed(2);
+    }
+  }
 
   return (
     <ImageBackground source={hotBackground} style={styles.backgroundImage}>
@@ -16,11 +31,11 @@ export default function App() {
         <SafeAreaView style={styles.root}>
           <View style={styles.workspace}>
             <TemperatureDisplay
-              temperature={temperatureInput}
-              currentUnit={currentUnit}
+              temperature={getConvertedTemperature()}
+              unit={oppositeUnit}
             />
             <Input
-              defaultValue={30}
+              defaultValue={temperatureInput}
               onChange={setTemperatureInput}
               unit={currentUnit}
             />
