@@ -5,12 +5,8 @@ import hotBackground from "./assets/hot.png";
 import { Input } from "./components/Input/Input";
 import { TemperatureDisplay } from "./components/TemperatureDisplay/TemperatureDisplay";
 import { useState } from "react";
-import {
-  UNITS,
-  convertTemperatureTo,
-  getOppositeUnit,
-} from "./utils/temperature";
-import { get } from "react-native/Libraries/TurboModule/TurboModuleRegistry";
+import { convertTemperatureTo, getOppositeUnit } from "./utils/temperature";
+import { ConvertButton } from "./components/ConvertButton/ConvertButton";
 
 export default function App() {
   const [temperatureInput, setTemperatureInput] = useState(0);
@@ -39,7 +35,10 @@ export default function App() {
               onChange={setTemperatureInput}
               unit={currentUnit}
             />
-            <Text>Button</Text>
+            <ConvertButton
+              onPress={() => setCurrentUnit(oppositeUnit)}
+              unit={currentUnit}
+            />
           </View>
         </SafeAreaView>
       </SafeAreaProvider>
