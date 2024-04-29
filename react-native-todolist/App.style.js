@@ -24,4 +24,7 @@ export const styles = StyleSheet.create({
     borderTopColor: "#D9D9D9",
     borderTopWidth: 1,
   },
+  cardItem: {
+    marginBottom: 10,
+  },
 });
