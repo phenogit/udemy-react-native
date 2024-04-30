@@ -2,9 +2,9 @@ import { styles } from "./TodoCard.style";
 import { Text, Image, TouchableOpacity } from "react-native";
 import checkIcon from "../../assets/check.png";
 
-export function TodoCard({ todo }) {
+export function TodoCard({ todo, onPress }) {
   return (
-    <TouchableOpacity style={styles.card}>
+    <TouchableOpacity style={styles.card} onPress={() => onPress(todo)}>
       <Text
         style={[
           styles.title,
