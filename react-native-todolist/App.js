@@ -3,6 +3,7 @@ import { Text, View, ScrollView } from "react-native";
 import { styles } from "./App.style";
 import { Header } from "./components/Header/Header";
 import { TodoCard } from "./components/TodoCard/TodoCard";
+import { BottomTab } from "./components/BottomTab/BottomTab";
 import { useState } from "react";
 
 const TODO_LIST = [
@@ -19,6 +20,7 @@ const TODO_LIST = [
 
 export default function App() {
   const [todoList, setTodoList] = useState(TODO_LIST);
+  const [selectedTabName, setSelectedTabName] = useState("inProgress");
 
   function renderTodoList() {
     return todoList.map((todo) => (
@@ -49,7 +51,10 @@ export default function App() {
           <ScrollView>{renderTodoList()}</ScrollView>
         </View>
         <View style={styles.footer}>
-          <Text>Footer</Text>
+          <BottomTab
+            onPress={setSelectedTabName}
+            selectedTabName={selectedTabName}
+          />
         </View>
       </SafeAreaView>
     </SafeAreaProvider>
