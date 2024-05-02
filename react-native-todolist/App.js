@@ -22,8 +22,21 @@ export default function App() {
   const [todoList, setTodoList] = useState(TODO_LIST);
   const [selectedTabName, setSelectedTabName] = useState("inProgress");
 
+  function getFilteredTodoList() {
+    switch (selectedTabName) {
+      case "all":
+        return todoList;
+      case "inProgress":
+        return todoList.filter((todo) => !todo.isComplete);
+      case "done":
+        return todoList.filter((todo) => todo.isComplete);
+      default:
+        return todoList;
+    }
+  }
+
   function renderTodoList() {
-    return todoList.map((todo) => (
+    return getFilteredTodoList().map((todo) => (
       <View key={todo.id} style={styles.cardItem}>
         <TodoCard todo={todo} onPress={updateTodo} />
       </View>
@@ -52,6 +65,7 @@ export default function App() {
         </View>
         <View style={styles.footer}>
           <BottomTab
+            todoList={todoList}
             onPress={setSelectedTabName}
             selectedTabName={selectedTabName}
           />

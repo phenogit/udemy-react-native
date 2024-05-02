@@ -1,7 +1,23 @@
 import { styles } from "./BottomTab.style";
 import { Text, TouchableOpacity, View } from "react-native";
 
-export function BottomTab({ selectedTabName, onPress }) {
+export function BottomTab({ selectedTabName, onPress, todoList }) {
+  const countByStatus = todoList.reduce(
+    (todoCounts, todo) => {
+      if (todo.isComplete) {
+        todoCounts.done += 1;
+      } else {
+        todoCounts.inProgress += 1;
+      }
+      return todoCounts;
+    },
+    {
+      all: todoList.length,
+      inProgress: 0,
+      done: 0,
+    }
+  );
+
   function getTextStyle(tabName) {
     return {
       fontWeight: "bold",
@@ -12,16 +28,18 @@ export function BottomTab({ selectedTabName, onPress }) {
   return (
     <View style={styles.root}>
       <TouchableOpacity onPress={() => onPress("all")} style={styles.tabItem}>
-        <Text style={getTextStyle("all")}>All</Text>
+        <Text style={getTextStyle("all")}>All ({countByStatus.all})</Text>
       </TouchableOpacity>
       <TouchableOpacity
         onPress={() => onPress("inProgress")}
         style={styles.tabItem}
       >
-        <Text style={getTextStyle("inProgress")}>In progress</Text>
+        <Text style={getTextStyle("inProgress")}>
+          In progress ({countByStatus.inProgress})
+        </Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={() => onPress("done")} style={styles.tabItem}>
-        <Text style={getTextStyle("done")}>Done</Text>
+        <Text style={getTextStyle("done")}>Done ({countByStatus.done})</Text>
       </TouchableOpacity>
     </View>
   );
