@@ -5,7 +5,7 @@ import { Header } from "./components/Header/Header";
 import { TodoCard } from "./components/TodoCard/TodoCard";
 import { BottomTab } from "./components/BottomTab/BottomTab";
 import { AddButton } from "./components/AddButton/AddButton";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Dialog from "react-native-dialog";
 import uuid from "react-native-uuid";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -33,6 +33,8 @@ export default function App() {
   const [selectedTabName, setSelectedTabName] = useState("inProgress");
   const [isAddTodoDialogVisible, setIsAddTodoDialogVisible] = useState(false);
   const [inputValue, setInputValue] = useState("");
+
+  const scrollViewRef = useRef();
 
   useEffect(() => {
     loadTodoList();
@@ -101,6 +103,9 @@ export default function App() {
     setTodoList([...todoList, newTodo]);
     setIsAddTodoDialogVisible(false);
     setInputValue("");
+    setTimeout(() => {
+      scrollViewRef.current.scrollToEnd({ animated: true });
+    }, 300);
   }
 
   function deleteTodo(todo) {
@@ -166,7 +171,7 @@ export default function App() {
           <Header />
         </View>
         <View style={styles.body}>
-          <ScrollView>{renderTodoList()}</ScrollView>
+          <ScrollView ref={scrollViewRef}>{renderTodoList()}</ScrollView>
         </View>
         <AddButton onPress={() => setIsAddTodoDialogVisible(true)} />
         <View style={styles.footer}>
