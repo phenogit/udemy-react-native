@@ -2,9 +2,30 @@ import { ThemedText } from '@/components/ThemedText';
 import { StyleSheet, View, ImageBackground } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import backgroundImage from "@/assets/images/background.png";
+import { useEffect, useState } from 'react';
+import { requestForegroundPermissionsAsync, getCurrentPositionAsync } from 'expo-location';
 
 
 export default function HomeScreen() {
+  const [coordinates, setCoordinates] = useState({lat: 0, lng: 0});
+
+  useEffect(() => {
+    getUserCoordinates();
+  }, []);
+
+  async function getUserCoordinates() {
+    const {status} = await requestForegroundPermissionsAsync();
+    if (status === "granted") {
+      const location = await getCurrentPositionAsync();
+      setCoordinates({lat: location.coords.latitude, lng: location.coords.longitude});
+    } else {
+      console.log("Permission denied");
+      setCoordinates({lat: 48.85, lng: 2.35});
+    }
+  }
+
+  console.log(coordinates);
+
   return (
     <ImageBackground source={backgroundImage} imageStyle={styles.image} style={styles.imageBackground}>
       <SafeAreaProvider>
