@@ -4,14 +4,27 @@ import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import backgroundImage from "@/assets/images/background.png";
 import { useEffect, useState } from 'react';
 import { requestForegroundPermissionsAsync, getCurrentPositionAsync } from 'expo-location';
+import { MeteoAPI } from '@/api/meteo';
 
 
 export default function HomeScreen() {
   const [coordinates, setCoordinates] = useState({lat: 0, lng: 0});
+  const [weather, setWeather] = useState();
 
   useEffect(() => {
     getUserCoordinates();
   }, []);
+
+  useEffect(() => {
+    if (coordinates) {
+      fetchWeatherByCoords(coordinates)
+    }
+  }, [coordinates]);
+
+  async function fetchWeatherByCoords(coords: any) {
+    const weatherResponse = await MeteoAPI.fetchWeatherByCoords(coords);
+    setWeather(weatherResponse);
+  }
 
   async function getUserCoordinates() {
     const {status} = await requestForegroundPermissionsAsync();
@@ -25,6 +38,7 @@ export default function HomeScreen() {
   }
 
   console.log(coordinates);
+  console.log(weather);
 
   return (
     <ImageBackground source={backgroundImage} imageStyle={styles.image} style={styles.imageBackground}>
