@@ -1,12 +1,11 @@
-import { ThemedText } from '@/components/ThemedText';
 import { StyleSheet, View, ImageBackground } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
-import backgroundImage from "@/assets/images/background.png";
 import { useEffect, useState } from 'react';
 import { requestForegroundPermissionsAsync, getCurrentPositionAsync } from 'expo-location';
 import { MeteoAPI } from '@/api/meteo';
 import { useFonts } from 'expo-font';
-import { MeteoText } from "@/components/MeteoText/MeteoText"
+import { MeteoText } from "@/components/MeteoText/MeteoText";
+import { MeteoBasic } from "@/components/MeteoBasic/MeteoBasic";
 
 export default function HomeScreen() {
   const [coordinates, setCoordinates] = useState({lat: 0, lng: 0});
@@ -48,12 +47,13 @@ export default function HomeScreen() {
   console.log(weather);
 
   return (
-    <ImageBackground source={backgroundImage} imageStyle={styles.image} style={styles.imageBackground}>
+    <ImageBackground source={require("@/assets/images/background.png")} imageStyle={styles.image} style={styles.imageBackground}>
       <SafeAreaProvider>
         <SafeAreaView style={styles.container}>
           {isFontLoaded &&
           <>
           <View style={styles.meteo_basic}>
+            <MeteoBasic>Hello</MeteoBasic>
             <MeteoText>Basic Weather info</MeteoText>
           </View>
           <View style={styles.searchbar_container}>
