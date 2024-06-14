@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import { requestForegroundPermissionsAsync, getCurrentPositionAsync } from 'expo-location';
 import { MeteoAPI } from '@/api/meteo';
 import { useFonts } from 'expo-font';
-
+import { MeteoText } from "@/components/MeteoText/MeteoText"
 
 export default function HomeScreen() {
   const [coordinates, setCoordinates] = useState({lat: 0, lng: 0});
@@ -54,13 +54,13 @@ export default function HomeScreen() {
           {isFontLoaded &&
           <>
           <View style={styles.meteo_basic}>
-            <ThemedText style={styles.text}>Basic Weather info</ThemedText>
+            <MeteoText>Basic Weather info</MeteoText>
           </View>
           <View style={styles.searchbar_container}>
-            <ThemedText style={styles.text}>SearchBar</ThemedText>
+            <MeteoText>SearchBar</MeteoText>
           </View>
           <View style={styles.meteo_advanced}>
-            <ThemedText style={styles.text}>Advanced Weather info</ThemedText>
+            <MeteoText>Advanced Weather info</MeteoText>
           </View>
           </>
           }
@@ -80,10 +80,6 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-  },
-  text: {
-    fontSize: 20,
-    padding: 10
   },
   meteo_basic: {
     flex: 2,
