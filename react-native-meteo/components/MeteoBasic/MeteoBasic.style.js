@@ -8,9 +8,13 @@ export const styles = StyleSheet.create({
     alignSelf: "flex-end",
     transform: [{ rotate: "-90deg" }],
   },
+  interpretation_text: {
+    fontSize: 20,
+  },
   temperature_box: {
     flexDirection: "row",
     justifyContent: "space-between",
+    alignItems: "baseline",
   },
   temperature: {
     fontSize: 150,
