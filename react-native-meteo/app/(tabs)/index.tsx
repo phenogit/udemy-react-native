@@ -50,11 +50,10 @@ export default function HomeScreen() {
     <ImageBackground source={require("@/assets/images/background.png")} imageStyle={styles.image} style={styles.imageBackground}>
       <SafeAreaProvider>
         <SafeAreaView style={styles.container}>
-          {isFontLoaded &&
+          {isFontLoaded && weather && 
           <>
           <View style={styles.meteo_basic}>
-            <MeteoBasic>Hello</MeteoBasic>
-            <MeteoText>Basic Weather info</MeteoText>
+            <MeteoBasic />
           </View>
           <View style={styles.searchbar_container}>
             <MeteoText>SearchBar</MeteoText>
@@ -86,6 +85,7 @@ const styles = StyleSheet.create({
   },
   searchbar_container: {
     flex: 2,
+    marginTop: 100,
   },
   meteo_advanced: {
     flex: 1,

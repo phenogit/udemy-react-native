@@ -3,7 +3,7 @@ import { styles } from "./MeteoBasic.style";
 import { MeteoText } from "../MeteoText/MeteoText";
 import { Image } from "react-native";
 
-export function MeteoBasic({ children, ...restProps }) {
+export function MeteoBasic({ ...restProps }) {
   return (
     <>
       <View style={styles.clock}>
