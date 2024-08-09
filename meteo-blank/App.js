@@ -9,12 +9,25 @@ import {
 import { s } from "./App.style";
 import { Home } from "./pages/Home/Home";
 import backgroundImg from "./assets/background.png";
+import { MeteoAPI } from "./api/meteo";
 
 export default function App() {
   const [coordinates, setCoordinates] = useState(null);
+  const [weather, setWeather] = useState(null);
   useEffect(() => {
     getUserCoordinates();
   }, []);
+
+  useEffect(() => {
+    if (coordinates) {
+      fetchWeatherByCoords(coordinates);
+    }
+  }, [coordinates]);
+
+  async function fetchWeatherByCoords(coords) {
+    const weatherResponse = await MeteoAPI.fetchWeatherByCoords(coords);
+    setWeather(weatherResponse);
+  }
 
   async function getUserCoordinates() {
     const { status } = await requestForegroundPermissionsAsync();
@@ -33,6 +46,7 @@ export default function App() {
   }
 
   console.log("coordinates", coordinates);
+  console.log("weather", weather);
 
   return (
     <ImageBackground
