@@ -5,6 +5,7 @@ import {
   requestForegroundPermissionsAsync,
   getCurrentPositionAsync,
 } from "expo-location";
+import { useFonts } from "expo-font";
 
 import { s } from "./App.style";
 import { Home } from "./pages/Home/Home";
@@ -14,6 +15,13 @@ import { MeteoAPI } from "./api/meteo";
 export default function App() {
   const [coordinates, setCoordinates] = useState(null);
   const [weather, setWeather] = useState(null);
+
+  const [isFontLoaded] = useFonts({
+    "Alata-Regular": require("./assets/fonts/Alata-Regular.ttf"),
+  });
+
+  console.log("isFontLoaded", isFontLoaded);
+
   useEffect(() => {
     getUserCoordinates();
   }, []);
