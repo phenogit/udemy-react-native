@@ -2,14 +2,13 @@ import { View } from "react-native";
 
 import { s } from "./Home.style";
 import { Txt } from "../../components/Txt/Txt";
+import { MeteoBasic } from "../../components/MetoBasic/MeteoBasic";
 
 export function Home() {
   return (
     <>
       <View style={s.meteo_basic}>
-        <Txt onPress={() => console.log("hello")} style={{ fontSize: 70 }}>
-          Hello
-        </Txt>
+        <MeteoBasic />
       </View>
       <View style={s.searchbar_container}>
         <Txt>SearchBar</Txt>
