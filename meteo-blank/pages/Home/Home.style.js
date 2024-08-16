@@ -10,8 +10,4 @@ export const s = StyleSheet.create({
   meteo_advanced: {
     flex: 1,
   },
-  txt: {
-    fontSize: 30,
-    color: "white",
-  },
 });
