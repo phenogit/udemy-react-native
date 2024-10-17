@@ -1,5 +1,5 @@
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
-import { ImageBackground } from "react-native";
+import { Alert, ImageBackground } from "react-native";
 import { useEffect, useState } from "react";
 import {
   requestForegroundPermissionsAsync,
@@ -55,6 +55,15 @@ export default function App() {
     setCity(cityResponse);
   }
 
+  async function fetchCoordsByCity(coords) {
+    try {
+      const coordsResponse = await MeteoAPI.fetchCoordsByCity(coords);
+      setCoordinates(coordsResponse);
+    } catch (err) {
+      Alert.alert("Aouch !", err);
+    }
+  }
+
   async function getUserCoordinates() {
     const { status } = await requestForegroundPermissionsAsync();
     if (status === "granted") {
@@ -86,7 +95,13 @@ export default function App() {
                 initialRouteName="Home"
               >
                 <Stack.Screen name="Home">
-                  {() => <Home city={city} weather={weather} />}
+                  {() => (
+                    <Home
+                      city={city}
+                      weather={weather}
+                      onSubmitSearch={fetchCoordsByCity}
+                    />
+                  )}
                 </Stack.Screen>
                 <Stack.Screen name="Forecasts" component={Forecasts} />
               </Stack.Navigator>

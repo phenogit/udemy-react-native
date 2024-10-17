@@ -7,7 +7,7 @@ import { getWeatherInterpretation } from "../../utils/meteo-utils";
 import { MeteoAdvanced } from "../../components/MeteoAdvanced/MeteoAdvanced";
 import { SearchBar } from "../../components/SearchBar/SearchBar";
 
-export function Home({ city, weather }) {
+export function Home({ city, weather, onSubmitSearch }) {
   const currentWeather = weather.current_weather;
   const currentInterpretation = getWeatherInterpretation(
     currentWeather.weathercode
@@ -23,7 +23,7 @@ export function Home({ city, weather }) {
         />
       </View>
       <View style={s.searchbar_container}>
-        <SearchBar />
+        <SearchBar onSubmit={onSubmitSearch} />
       </View>
       <View style={s.meteo_advanced}>
         <MeteoAdvanced
