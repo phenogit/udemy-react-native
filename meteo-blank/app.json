@@ -1,5 +1,10 @@
 {
   "expo": {
+    "extra": {
+      "eas": {
+        "projectId": "04a9b7c9-3d57-492a-8aee-1086fea3f9ad"
+      }
+    },
     "plugins": [
       [
         "expo-location",
